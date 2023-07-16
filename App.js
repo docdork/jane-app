@@ -14,6 +14,8 @@ export default function App() {
   const [sound, setSound] = useState();
   const [modalState, setModalState] = useState(false);
   const [counter, setCounter] = useState(20);
+  const [eatState, setEatState] = useState("Chew");
+  const [eatColor, setEatColor] = useState(styles.modalText)
 
   async function playPing() {
     const { sound } = await Audio.Sound.createAsync(
@@ -38,12 +40,12 @@ export default function App() {
       : undefined;
   }, [sound]);
 
-
   function clickHandler1() {
     Vibration.vibrate();
     playSound();
     setModalState(true);
-    setCounter(20);
+    setCounter(3);
+    setEatState("Bite");
   }
 
   function closeHandler() {
@@ -51,23 +53,32 @@ export default function App() {
   }
 
   useEffect(() => {
-    if (modalState) {
-      const timer =
-        counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-      return () => clearInterval(timer);
-    }
+    const timer =
+      counter > -1 && setInterval(() => setCounter(counter - 1), 1000);
+    return () => clearInterval(timer);
   }, [counter]);
 
-  if (counter === 0) {
-    playPing();
-    Vibration.vibrate();
-    setCounter(20);
+  if (modalState) {
+    if (counter === -1) {
+      playPing();
+      Vibration.vibrate();
+      setCounter(20);
+      if (eatState === "Chew") {
+        setEatState("Pause");
+        setEatColor(styles.modalTextPause);
+
+      }else{
+        setEatState("Chew");
+        setEatColor(styles.modalText);
+      }
+    }
   }
 
   return (
     <View style={styles.container}>
       <Modal visible={modalState} animationType="slide">
         <View style={styles.container}>
+          <Text style={eatColor}>{eatState}</Text>
           <Text style={styles.timerText}>{counter}</Text>
           <Pressable onPress={closeHandler} style={styles.button}>
             <Text style={styles.text}>Done</Text>
@@ -87,14 +98,12 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 40,
     flex: 1,
-    backgroundColor: "#451a52",
+    backgroundColor: "#330528",
     alignItems: "center",
     justifyContent: "center",
-    borderColor: "white",
-    borderWidth: 20,
-    borderRadius: 55,
+    borderTopColor: "white",
+    borderTopWidth: 1,
   },
 
   button: {
@@ -127,7 +136,17 @@ const styles = StyleSheet.create({
   },
   timerText: {
     color: "#fff",
-    fontSize: 40,
+    fontSize: 100,
     padding: 30,
   },
+  modalText: {
+    color: "#32c2a5",
+    fontSize: 70,
+    padding: 30,
+  },
+  modalTextPause: {
+    color: "#ad1017",
+    fontSize: 70,
+    padding: 30,
+  }
 });

@@ -14,8 +14,8 @@ export default function App() {
   const [sound, setSound] = useState();
   const [modalState, setModalState] = useState(false);
   const [counter, setCounter] = useState(20);
-  const [eatState, setEatState] = useState("Chew");
-  const [eatColor, setEatColor] = useState(styles.modalText)
+  const [eatState, setEatState] = useState("Bite");
+  const [eatColor, setEatColor] = useState(styles.modalTextBite);
 
   async function playPing() {
     const { sound } = await Audio.Sound.createAsync(
@@ -46,6 +46,7 @@ export default function App() {
     setModalState(true);
     setCounter(3);
     setEatState("Bite");
+    setEatColor(styles.modalTextBite);
   }
 
   function closeHandler() {
@@ -62,14 +63,23 @@ export default function App() {
     if (counter === -1) {
       playPing();
       Vibration.vibrate();
-      setCounter(20);
-      if (eatState === "Chew") {
+
+      if (eatState === "Bite") {
+        setEatState("Chew");
+        setEatColor(styles.modalTextChew);
+        setCounter(20);
+      } else if (eatState === "Chew") {
+        setEatState("Swallow");
+        setEatColor(styles.modalTextSwallow);
+        setCounter("5");
+      } else if (eatState == "Swallow") {
         setEatState("Pause");
         setEatColor(styles.modalTextPause);
-
-      }else{
-        setEatState("Chew");
-        setEatColor(styles.modalText);
+        setCounter("20");
+      } else {
+        setEatState("Bite");
+        setEatColor(styles.modalTextBite);
+        setCounter("3");
       }
     }
   }
@@ -85,10 +95,10 @@ export default function App() {
           </Pressable>
         </View>
       </Modal>
-      <Text style={styles.mainText}>Jane's App</Text>
+      <Text style={styles.mainText}>Ready to Eat?</Text>
       <View style={styles.footerContainer}>
         <Pressable onPress={clickHandler1} style={styles.button}>
-          <Text style={styles.text}>Let's Eat</Text>
+          <Text style={styles.text}>Let's Eat!</Text>
         </Pressable>
       </View>
       <StatusBar style="auto" />
@@ -139,14 +149,29 @@ const styles = StyleSheet.create({
     fontSize: 100,
     padding: 30,
   },
-  modalText: {
+  modalTextChew: {
     color: "#32c2a5",
     fontSize: 70,
     padding: 30,
   },
   modalTextPause: {
-    color: "#ad1017",
+    color: "#BA324F",
     fontSize: 70,
     padding: 30,
-  }
+  },
+  modalTextSwallow: {
+    color: "#4BA3C3",
+    fontSize: 70,
+    padding: 30,
+  },
+  modalTextPause: {
+    color: "#BA324F",
+    fontSize: 70,
+    padding: 30,
+  },
+  modalTextBite: {
+    color: "#227DAA",
+    fontSize: 70,
+    padding: 30,
+  },
 });

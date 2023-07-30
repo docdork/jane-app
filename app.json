@@ -7,7 +7,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/brooke-lark-jUPOXXRNdcA-unsplash.jpg",
+      "image": "./assets/brooke-lark-jUPOXXRNdcA-unsplash.png",
       "resizeMode": "cover",
       "backgroundColor": "#090B0C"
     },

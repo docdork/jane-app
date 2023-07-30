@@ -10,6 +10,7 @@ import {
 import { useState, useEffect } from "react";
 import { Audio } from "expo-av";
 
+
 export default function App() {
   const [sound, setSound] = useState();
   const [modalState, setModalState] = useState(false);

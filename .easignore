@@ -1,0 +1,27 @@
+# Ignore build artifacts & IDE caches
+
+node_modules/
+.expo/
+
+# Gradle caches and wrapper data
+
+android/.gradle
+android/.gradle/\*\*
+
+# Android Studio workspace settings
+
+android/.idea
+android/.idea/\*\*
+
+# Build outputs
+
+android/app/build
+android/app/build/\*\*
+
+# Local configuration
+
+android/local.properties
+
+# Optional: ignore large assets not needed for build
+
+# assets/\*.mp3

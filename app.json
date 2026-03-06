@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "jane-app",
-    "slug": "jane-app",
+    "slug": "janes-food-timer",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -29,8 +29,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "ec715fd9-7afd-4fc0-9aa2-5ff393c3d3c9"
+        "projectId": "791d91a4-a305-47dd-89a6-4a175f496c7c"
       }
-    }
+    },
+    "owner": "docdork"
   }
 }

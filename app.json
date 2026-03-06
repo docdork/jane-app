@@ -11,7 +11,9 @@
       "resizeMode": "cover",
       "backgroundColor": "#090B0C"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -19,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.docdork.janesfoodtimer"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ec715fd9-7afd-4fc0-9aa2-5ff393c3d3c9"
+      }
     }
   }
 }
